@@ -278,7 +278,7 @@ public class Parser
 
         if(match(TokenType.IDENTIFIER))
         {
-            return new Expr.Identifier(type, previous().lexeme);
+            return new Expr.Variable(type, previous().lexeme);
         }
 
         throw new Error("not a primary: " + peek().lexeme + " line: " + peek().line);

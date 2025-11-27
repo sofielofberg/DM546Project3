@@ -143,7 +143,7 @@ public class ASTPrinter implements ExprVisitor<String>, StmtVisitor<String>
   }
 
   @Override
-  public String visitIdentifier(Identifier expr) 
+  public String visitVariable(Variable expr) 
   {
     String string = "VariableExpr" + NL;
     indent++;
@@ -151,7 +151,7 @@ public class ASTPrinter implements ExprVisitor<String>, StmtVisitor<String>
     {
       string += space() + "Cast_To " + expr.type.lexeme + NL;
     }
-    string += space() + expr.string + NL;
+    string += space() + expr.name + NL;
     indent--;
     return string;
   }
@@ -161,9 +161,9 @@ public class ASTPrinter implements ExprVisitor<String>, StmtVisitor<String>
   {
     String string = "LiteralExpr" + NL;
     indent++;
-    if(expr.type != null)
+    if(expr.cast_type != null)
     {
-      string += space() + "Cast_To " + expr.type.lexeme + NL;
+      string += space() + "Cast_To " + expr.cast_type.lexeme + NL;
     }
     if (expr.object instanceof String)
     {
@@ -182,9 +182,9 @@ public class ASTPrinter implements ExprVisitor<String>, StmtVisitor<String>
   {
     String string = "LiteralExpr" + NL;
     indent++;
-    if(expr.type != null)
+    if(expr.cast_type != null)
     {
-      string += space() + "Cast_To " + expr.type.lexeme + NL;
+      string += space() + "Cast_To " + expr.cast_type.lexeme + NL;
     }
     string += space() + expr.accept(this);
     indent--;

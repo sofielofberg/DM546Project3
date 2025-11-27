@@ -96,12 +96,12 @@ public abstract class Expr
 
     public static class Literal extends Expr 
     {
-        public final Token type;
+        public final Token cast_type;
         public final Object object;
 
         public Literal(Token type, Object object) 
         {
-            this.type = type;
+            this.cast_type = type;
             this.object = object;
         }
 
@@ -113,32 +113,32 @@ public abstract class Expr
 
     }
 
-    public static class Identifier extends Expr 
+    public static class Variable extends Expr 
     {
         public final Token type;
-        public final String string;
+        public final String name;
 
-        public Identifier(Token type, String string) 
+        public Variable(Token type, String name) 
         {
             this.type = type;
-            this.string = string;
+            this.name = name;
         }
 
         @Override
         public <T> T accept(ExprVisitor<T> visitor) 
         {
-            return visitor.visitIdentifier(this);
+            return visitor.visitVariable(this);
         }
     }
 
     public static class Grouping extends Expr 
     {
-        public final Token type;
+        public final Token cast_type;
         public final Expr expr;
 
         public Grouping (Token type, Expr expr) 
         {
-            this.type = type;
+            this.cast_type = type;
             this.expr = expr;
         }
 
